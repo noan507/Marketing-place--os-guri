@@ -1,56 +1,98 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Marketing place</title>
-</head>
-<body>
-    <head>
-        <div class="container navPrincipal">
-            <div class="marcasistema">
-                <div class="logosistema">&#128274;</div>
-                <h1>Sistema de Marketing place</h1>
-            </div>
-        </div>
-        <div class="acoesnav">
-            <button class="botao" onclick="abrirlogin()">Entrar</button>
-            <button class="botao botaoPrimeiro" onclick="rolarParaRapido()">Nova reserva</button>
-        </div>
-    </head>
-
-  <main class="container">
-    <section>class="secaohero
-        <div class="cartaohero">
-            <span class="selo">&#129513; entidade: usuario-recurso-reserva</span>
-            <h2>reserve recursoso de forma simples e rapida</h2>
-            <p class="textomutado"> selecione o <strong>recursoso</strong>,escolha<strong>data/horario</strong> e confirme. Depois, acompanhe suas <strong>reserva</strong>na area do usario</p>
-            <form action="" class="formrapido">
-                <select>
-                    <option value="">-selecione o recurso</option>
-                    <option>laboratorio01</option>
-                    <option >laboratorio02</option>
-                    <option >projetor 4k</option>
-                    <option>espaço de reunioes</option>
-                </select>
-                <input class="entrada" type="date" placeholder="Data">
-                <input class="entrada" type="time" placeholder="inicio">
-                <input class="entrada" type="time" placeholder="fim">
-                <button class="botao botaoPrimeiro" type="submit">reserva</button>
-            </form>
-        </div>
-    </div class="cartaohero">
-<h3>status do Sistema</h3>
-<p class="textomutado">Ambiente <strong>DEMO</strong>. intregação real sera feita apos a modelagem e api</p>
-<ul class="textomutado">
-    <li>&#128272; auteticaçao: planek=jada (sprint 4-5)</li>
-    <li>&#128450; perrsitencia: JASON, SQlite e MYSQL</li>
-    <li>&#128737;perfis: usuario e adiministrador</li>
-</ul>
-</div>
-        </section>
-</section class="grandeentidades"></selection>
-  </main>
-
-</body>
-</html>
+<!-- =========================
+     index.html – Sprint 1
+     ========================= -->
+     <!DOCTYPE html>
+     <html lang="pt-br">
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Sistema de Reserva de Recursos</title>
+       <link rel="stylesheet" href="style.css">
+     </head>
+     <body>
+       <header>
+         <div class="container navPrincipal">
+           <div class="marcaSistema">
+             <div class="logoSistema">&#128274;</div>
+             <h1>Sistema de Reserva de Recursos</h1>
+           </div>
+           <div class="acoesNav">
+             <button class="botao" onclick="abrirLogin()">Entrar</button>
+             <button class="botao botaoPrimario" onclick="rolarParaRapido()">Nova Reserva</button>
+           </div>
+         </div>
+       </header>
+     
+       <main class="container">
+         <section class="secaoHero">
+           <div class="cartaoHero">
+             <span class="selo">&#129513; Entidades: Usuário • Recurso • Reserva</span>
+             <h2>Reserve recursos de forma simples e rápida</h2>
+             <p class="textoMutado">Selecione o <strong>recurso</strong>, escolha <strong>data/horário</strong> e confirme. Depois, acompanhe suas <strong>reservas</strong> na área do usuário.</p>
+             <form class="formRapido">
+               <select>
+                 <option value="">— Selecione o recurso —</option>
+                 <option>Laboratório 01</option>
+                 <option>Laboratório 02</option>
+                 <option>Projetor 4K</option>
+                 <option>Espaço de Reuniões</option>
+               </select>
+               <input class="entrada" type="date" placeholder="Data">
+               <input class="entrada" type="time" placeholder="Início">
+               <input class="entrada" type="time" placeholder="Fim">
+               <button class="botao botaoPrimario" type="submit">Reservar</button>
+             </form>
+           </div>
+           <div class="cartaoHero">
+             <h3>Status do sistema</h3>
+             <p class="textoMutado">Ambiente <strong>DEMO</strong>. Integração real será feita após modelagem e API.</p>
+             <ul class="textoMutado">
+               <li>&#128272; Autenticação: planejada (Sprint 4–5)</li>
+               <li>&#128450; Persistência: JSON → SQLite → MySQL</li>
+               <li>&#128737; Perfis: Usuário e Administrador</li>
+             </ul>
+           </div>
+         </section>
+     
+         <section class="gradeEntidades">
+           <article class="cartao">
+             <h3>Usuário</h3>
+             <p class="textoMutado">Cadastro, login e área do usuário com histórico de reservas.</p>
+           </article>
+           <article class="cartao">
+             <h3>Recurso</h3>
+             <p class="textoMutado">Catálogo administrado (salas, equipamentos). Regras de disponibilidade.</p>
+           </article>
+           <article class="cartao">
+             <h3>Reserva</h3>
+             <p class="textoMutado">Criação, edição e cancelamento com validação de conflitos.</p>
+           </article>
+         </section>
+     
+         <footer>
+           <div class="container">
+             <small class="textoMutado">Sprint 1 · Prototipagem de Interface (HTML/CSS). Próximo: modelagem e persistência.</small>
+           </div>
+         </footer>
+       </main>
+     
+       <dialog id="modalLogin">
+         <div class="conteudoModal">
+           <header>
+             <h3>Entrar</h3>
+             <p class="textoMutado">Protótipo visual. Implementação de autenticação nas próximas sprints.</p>
+           </header>
+           <form method="dialog">
+             <input class="entrada" type="email" placeholder="E-mail" required>
+             <input class="entrada" type="password" placeholder="Senha" required>
+             <div style="display:flex; gap:10px; justify-content:flex-end">
+               <button class="botao" value="cancelar">Cancelar</button>
+               <button class="botao botaoPrimario" value="entrar">Entrar</button>
+             </div>
+           </form>
+         </div>
+       </dialog>
+     
+       <script src="script.js"></script>
+     </body>
+     </html>
