@@ -1,72 +1,123 @@
-// Modal de login
-const loginBtn = document.getElementById("loginBtn");
-const loginModal = document.getElementById("loginModal");
-const closeBtns = document.querySelectorAll(".close");
-const submitLogin = document.getElementById("submitLogin");
-let loggedUser = null;
+const btnLogin = document.getElementById("btnLogin");
+const modalLogin = document.getElementById("modalLogin");
+const formLogin = document.getElementById("formLogin");
+const cancelarLogin = document.getElementById("cancelarLogin");
 
-loginBtn.addEventListener("click", () => loginModal.style.display = "block");
+const btnAddProduto = document.getElementById("btnAddProduto");
+const modalAddProduto = document.getElementById("modalAddProduto");
+const formAddProduto = document.getElementById("formAddProduto");
+const cancelarAddProduto = document.getElementById("cancelarAddProduto");
 
-submitLogin.addEventListener("click", () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+const listaProdutos = document.getElementById("listaProdutos");
+const campoPesquisa = document.getElementById("campoPesquisa");
+const btnPesquisar = document.getElementById("btnPesquisar");
 
-  if (email && password) {
-    loggedUser = email.split("@")[0];
-    loginModal.style.display = "none";
-    loginBtn.textContent = `Olá, ${loggedUser}`;
+const toast = document.getElementById("toast");
+
+let usuario = null;
+let produtos = [];
+
+// TOAST
+function mostrarToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("mostrar");
+  setTimeout(() => toast.classList.remove("mostrar"), 3000);
+}
+
+// LOGIN
+btnLogin.addEventListener("click", () => {
+  modalLogin.showModal();
+});
+
+cancelarLogin.addEventListener("click", () => {
+  modalLogin.close();
+});
+
+formLogin.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const nome = document.getElementById("nomeLogin").value.trim();
+  const email = document.getElementById("emailLogin").value.trim();
+  const senha = document.getElementById("senhaLogin").value.trim();
+
+  if (nome && email && senha) {
+    usuario = { nome, email };
+    modalLogin.close();
+    mostrarToast(`Olá, ${nome}!`);
+    btnLogin.textContent = `👋 ${nome}`;
   } else {
-    alert("Preencha todos os campos!");
+    mostrarToast("Preencha todos os campos!");
   }
 });
 
-closeBtns.forEach(btn => btn.addEventListener("click", () => {
-  btn.closest(".modal").style.display = "none";
-}));
-
-window.onclick = e => {
-  if (e.target.classList.contains("modal")) {
-    e.target.style.display = "none";
+// ADICIONAR PRODUTO
+btnAddProduto.addEventListener("click", () => {
+  if (!usuario) {
+    mostrarToast("Você precisa estar logado para adicionar produtos!");
+    return;
   }
-};
-
-// Produtos
-const addProductBtn = document.getElementById("addProductBtn");
-const addProductModal = document.getElementById("addProductModal");
-const saveProduct = document.getElementById("saveProduct");
-const productList = document.getElementById("product-list");
-
-addProductBtn.addEventListener("click", () => addProductModal.style.display = "block");
-
-saveProduct.addEventListener("click", () => {
-  const name = document.getElementById("productName").value.trim();
-  const price = document.getElementById("productPrice").value.trim();
-  const category = document.getElementById("productCategory").value.trim();
-  const desc = document.getElementById("productDesc").value.trim();
-
-  if (!name || !price) return alert("Preencha nome e preço!");
-
-  const card = document.createElement("div");
-  card.classList.add("product-card");
-  card.innerHTML = `
-    <h3>${name}</h3>
-    <p>Preço: R$ ${price}</p>
-    <p>Categoria: ${category || "N/A"}</p>
-    <small>${desc || ""}</small>
-  `;
-  productList.appendChild(card);
-
-  addProductModal.style.display = "none";
-  document.querySelectorAll(".modal-content input, .modal-content textarea").forEach(e => e.value = "");
+  modalAddProduto.showModal();
 });
 
-// Pesquisa
-const searchBtn = document.getElementById("searchBtn");
-const searchInput = document.getElementById("searchInput");
+cancelarAddProduto.addEventListener("click", () => {
+  modalAddProduto.close();
+});
 
-searchBtn.addEventListener("click", () => {
-  const term = searchInput.value.toLowerCase();
-  document.querySelectorAll(".product-card").forEach(card => {
-    card.style.display = card.textContent.toLowerCase().includes(term) ? "block" : "none";
+formAddProduto.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nome = document.getElementById("nomeProduto").value.trim();
+  const preco = document.getElementById("precoProduto").value.trim();
+  const categoria = document.getElementById("categoriaProduto").value.trim();
+  const obs = document.getElementById("obsProduto").value.trim();
+
+  if (!nome || !preco) {
+    mostrarToast("Preencha nome e preço!");
+    return;
+  }
+
+  produtos.push({ nome, preco, categoria, obs });
+  renderizarProdutos();
+  modalAddProduto.close();
+  mostrarToast("Você publicou o seu produto!");
+  formAddProduto.reset();
+});
+
+// RENDERIZAR PRODUTOS
+function renderizarProdutos() {
+  listaProdutos.innerHTML = "";
+  produtos.forEach((p) => {
+    const div = document.createElement("div");
+    div.classList.add("produto");
+    div.innerHTML = `
+      <h3>${p.nome}</h3>
+      <p><b>Preço:</b> R$ ${p.preco}</p>
+      <p><b>Categoria:</b> ${p.categoria || "—"}</p>
+      <p><b>Obs:</b> ${p.obs || "—"}</p>
+    `;
+    listaProdutos.appendChild(div);
   });
+}
+
+// PESQUISAR PRODUTO
+btnPesquisar.addEventListener("click", () => {
+  const termo = campoPesquisa.value.trim().toLowerCase();
+  const encontrados = produtos.filter((p) =>
+    p.nome.toLowerCase().includes(termo)
+  );
+  if (encontrados.length) {
+    listaProdutos.innerHTML = "";
+    encontrados.forEach((p) => {
+      const div = document.createElement("div");
+      div.classList.add("produto");
+      div.innerHTML = `
+        <h3>${p.nome}</h3>
+        <p><b>Preço:</b> R$ ${p.preco}</p>
+        <p><b>Categoria:</b> ${p.categoria || "—"}</p>
+        <p><b>Obs:</b> ${p.obs || "—"}</p>
+      `;
+      listaProdutos.appendChild(div);
+    });
+  } else {
+    mostrarToast("Nenhum produto encontrado!");
+  }
 });

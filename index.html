@@ -9,46 +9,70 @@
 <body>
   <header>
     <h1>Marketplace</h1>
-    <div class="actions">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Pesquisar produto..." />
-        <button id="searchBtn">🔍</button>
-      </div>
-      <button id="loginBtn" class="login-btn">Entrar</button>
+    <div class="acoesHeader">
+      <button id="btnLogin">Entrar</button>
+      <button id="btnAddProduto">+ Produto</button>
+      <input id="campoPesquisa" type="text" placeholder="Pesquisar produtos..." />
+      <button id="btnPesquisar">🔍</button>
     </div>
   </header>
 
   <main>
-    <section id="add-product-section">
-      <button id="addProductBtn" class="add-btn">+ Adicionar Produto</button>
-    </section>
-
-    <section id="product-list" class="product-list"></section>
+    <section id="listaProdutos"></section>
   </main>
 
-  <!-- Modal de Login -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Login</h2>
-      <input type="email" id="email" placeholder="Seu Gmail" />
-      <input type="password" id="password" placeholder="Sua senha" />
-      <button id="submitLogin">Entrar</button>
+  <!-- Modal de login -->
+  <dialog id="modalLogin">
+    <div class="conteudoModal">
+      <h3>Entrar</h3>
+      <form id="formLogin" method="dialog">
+        <label>Nome:</label>
+        <input type="text" id="nomeLogin" required placeholder="Seu nome..." />
+        <label>Email:</label>
+        <input type="email" id="emailLogin" required placeholder="email@email.com" />
+        <label>Senha:</label>
+        <input type="password" id="senhaLogin" required placeholder="******" />
+        <div class="botoesModal">
+          <button type="button" id="cancelarLogin">Cancelar</button>
+          <button type="submit" class="botaoPrimario">Entrar</button>
+        </div>
+      </form>
     </div>
-  </div>
+  </dialog>
 
-  <!-- Modal de Adicionar Produto -->
-  <div id="addProductModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Novo Produto</h2>
-      <input type="text" id="productName" placeholder="Nome do produto" />
-      <input type="number" id="productPrice" placeholder="Preço" />
-      <input type="text" id="productCategory" placeholder="Categoria" />
-      <textarea id="productDesc" placeholder="Observações (opcional)"></textarea>
-      <button id="saveProduct">Adicionar</button>
+  <!-- Modal de adicionar produto -->
+  <dialog id="modalAddProduto">
+    <div class="conteudoModal">
+      <h3>Adicionar novo produto</h3>
+      <form id="formAddProduto" method="dialog">
+        <table class="tabelaAddProduto">
+          <tr>
+            <td><label for="nomeProduto">Nome do produto:</label></td>
+            <td><input class="entrada" type="text" id="nomeProduto" placeholder="Ex: Aula particular de matemática" required></td>
+          </tr>
+          <tr>
+            <td><label for="precoProduto">Preço (R$):</label></td>
+            <td><input class="entrada" type="number" id="precoProduto" placeholder="Ex: 50" required></td>
+          </tr>
+          <tr>
+            <td><label for="categoriaProduto">Categoria:</label></td>
+            <td><input class="entrada" type="text" id="categoriaProduto" placeholder="Ex: Educação, Serviços..."></td>
+          </tr>
+          <tr>
+            <td><label for="obsProduto">Observação:</label></td>
+            <td><textarea class="entrada" id="obsProduto" placeholder="Opcional..."></textarea></td>
+          </tr>
+        </table>
+
+        <div class="botoesModal">
+          <button type="button" id="cancelarAddProduto">Cancelar</button>
+          <button type="submit" class="botaoPrimario">Publicar</button>
+        </div>
+      </form>
     </div>
-  </div>
+  </dialog>
+
+  <div id="toast"></div>
 
   <script src="script.js"></script>
 </body>

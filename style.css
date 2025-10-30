@@ -1,140 +1,145 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+:root {
+  --corFundo: #0b1220;
+  --corSecundaria: #111827;
+  --corTexto: #e5e7eb;
+  --corMarca: #2563eb;
+  --sombra: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
 body {
-  background-color: #0b0b0b;
-  color: white;
-  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: var(--corFundo);
+  color: var(--corTexto);
+  margin: 0;
+  padding: 0;
 }
 
 header {
+  background: var(--corSecundaria);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111;
-  padding: 15px 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  padding: 12px 24px;
+  box-shadow: var(--sombra);
 }
 
 h1 {
-  font-size: 24px;
-  color: #00aaff;
+  margin: 0;
+  color: var(--corMarca);
 }
 
-.actions {
+.acoesHeader {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
-.search-box {
-  display: flex;
-  align-items: center;
-  background: #1a1a1a;
-  border-radius: 6px;
-  padding: 5px;
-}
-
-.search-box input {
-  background: none;
-  border: none;
-  color: white;
-  outline: none;
-  padding: 5px;
-}
-
-.search-box button {
-  background: none;
-  border: none;
-  color: #00aaff;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.login-btn, .add-btn, #saveProduct, #submitLogin {
-  background-color: #00aaff;
-  color: white;
+button {
+  background: #1f2937;
+  color: var(--corTexto);
   border: none;
   border-radius: 8px;
-  padding: 8px 15px;
+  padding: 8px 12px;
   cursor: pointer;
-  font-weight: bold;
+  transition: 0.2s;
 }
 
-.login-btn:hover, .add-btn:hover {
-  background-color: #0080cc;
+button:hover {
+  background: var(--corMarca);
+  color: #fff;
 }
 
-#add-product-section {
-  display: flex;
-  justify-content: flex-start;
-  padding: 20px 30px;
-}
-
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 0 30px 50px;
-}
-
-.product-card {
-  background-color: #111;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.2s;
-  border: 1px solid #00aaff30;
-}
-
-.product-card:hover {
-  transform: scale(1.05);
-}
-
-.product-card h3 {
-  color: #00aaff;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  background-color: #111;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  color: white;
-}
-
-.modal-content input, .modal-content textarea {
-  width: 90%;
-  margin: 8px 0;
+input {
+  background: #1f2937;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--corTexto);
+  border-radius: 8px;
   padding: 8px;
+}
+
+/* Produtos */
+#listaProdutos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  padding: 24px;
+}
+
+.produto {
+  background: var(--corSecundaria);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.produto h3 {
+  color: var(--corMarca);
+  margin: 0;
+}
+
+/* Modal */
+dialog {
   border: none;
-  border-radius: 6px;
-  background: #1a1a1a;
-  color: white;
+  border-radius: 16px;
+  background: var(--corSecundaria);
+  color: var(--corTexto);
+  padding: 20px;
+  box-shadow: var(--sombra);
 }
 
-.close {
-  float: right;
-  color: #aaa;
-  font-size: 22px;
-  cursor: pointer;
+.conteudoModal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.close:hover {
-  color: white;
+.conteudoModal input,
+.conteudoModal textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #0b1220;
+  color: var(--corTexto);
+}
+
+.botoesModal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botaoPrimario {
+  background: var(--corMarca);
+  color: #fff;
+}
+
+/* Tabela */
+.tabelaAddProduto td {
+  padding: 6px 4px;
+}
+
+.entrada {
+  width: 100%;
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--corMarca);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: var(--sombra);
+  opacity: 0;
+  transition: 0.3s;
+}
+#toast.mostrar {
+  opacity: 1;
 }
